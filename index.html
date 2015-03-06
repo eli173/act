@@ -4,21 +4,27 @@
 <html>
   <head>
     <title>ACT Math Practice Questions</title>
-    <script src="questions.js">  
+    <script src="questions.js"></script> 
+    <link rel="stylesheet" href="style.css">
+    <script>window.onload = function(){sampleQ.ask();}</script>
   </head>
   <body>
-    <center>
-      Hello!
+    <div align="center">
       <div id="question">
 	placeholder text
       </div>
-      <div id="answers">
-	<div id="a">A</div>
-	<div id="b">B</div>
-	<div id="c">C</div>
-	<div id="d">D</div>
-	<div id="e">E</div>
+      <div class="container">
+	<div align="left" id="answers">
+	  <div id="a">A</div>
+	  <div id="b">B</div>
+	  <div id="c">C</div>
+	  <div id="d">D</div>
+	  <div id="e">E</div>
+	</div>
       </div>
-    </center>
+      <div id="results">
+	nothing here
+      </div>
+    </div>
   </body>
 </html>
