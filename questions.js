@@ -33,9 +33,6 @@ Question.prototype.selected = function(choice)
 Question.prototype.ask = function()
 {
     var q = this;
-    console.log("bef")
-    console.log(this)
-    console.log("aft")
     var ansPreHTML = '<div class="ansletter">'
     var ansMidHTML = '</div> '
     document.getElementById("question").innerHTML = this.question;

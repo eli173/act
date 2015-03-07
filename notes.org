@@ -1,0 +1,13 @@
+
+
+random
+
+to weight closer to 0 take the logarithm of the number
+
+
+
+
+types of problems
+
+* GCF
+* 
