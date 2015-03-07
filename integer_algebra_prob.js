@@ -18,7 +18,7 @@ var gcd = function(a,b)
 
 var simplify_frac = function(n, d)
 {
-    if (n<0&&d<0)
+    if (d<0) // if both neg then pos, if just d then swap
     {
 	n = -n;
 	d = -d;
