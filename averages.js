@@ -8,7 +8,7 @@ var average = function(numls)
 
 var AveragesProb = function()
 {
-    return AveragesType1();
+    return (Math.random()>0.5) ? AveragesType1() : AveragesType2();
 
 }
 
@@ -40,3 +40,37 @@ var AveragesType1 = function()
     return q;
 }
 
+var AveragesType2 = function()
+{
+    var name = "Ronaldo"
+    var qstring = name+" has taken four of the five tests in his math class and gotten the following grades:</br>"
+    var avg = [90,94,88][Math.round(Math.random()*2)];
+    var grades = [avg,avg,avg,avg];
+    for(var i=0;i<4;i++)
+    {
+	grades[i] += Math.round(Math.random()*8)-4;
+    }
+    // sanity check
+    var ans = avg*5-(grades[0]+grades[1]+grades[2]+grades[3]);
+    while(ans>100)
+    {
+	grades[Math.round(Math.random()*3)] += 1;
+	ans = avg*5-(grades[0]+grades[1]+grades[2]+grades[3]);
+    }
+    var opts = [];
+    for(var i=0;i<4;i++)
+    {
+	opts[i] = Math.round(Math.random()*8)-4+avg;
+    }
+    opts.push(ans);
+    opts.sort(function(a,b){return Math.random>0.5;});
+    qstring += String(grades[0])+", "+String(grades[1])+", "+
+	String(grades[2])+", "+String(grades[3])+"</br>";
+    qstring +="If he wants to get an average of "+String(avg)+
+	" for all 5 tests, what grade does he need to get "+
+	"on the last test?";
+    // TODO
+    var expl = "todo"
+    var q = new Question(qstring, opts, ans, expl);
+    return q;
+}

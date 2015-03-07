@@ -45,7 +45,7 @@ var IntegerAlgebraProb = function()
 	    (coeffs[0]-coeffs[2]==0));
     this.coeffs = coeffs;
     var thevar = vars[Math.round(Math.random()*(vars.length-1))];
-    var qstring = "Solve for <it>x</it>:</br>";
+    var qstring = "Solve for <i>"+thevar+"</i>:</br>";
     qstring += this.get_a_side(coeffs[0],coeffs[1],thevar) +
 	" = " +
 	this.get_a_side(coeffs[2],coeffs[3],thevar);
