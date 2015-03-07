@@ -12,6 +12,14 @@
     
 }
 
+#question {
+    width:400px;
+}
+
+#results {
+    width:400px;
+}
+
 #next {
     padding: 1px 10px 1px 10px;
     color: #fff;

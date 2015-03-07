@@ -68,7 +68,7 @@ var sampleQ = new Question("What's 3 + 4?",
 var nextQuestion = function()
 {
     var new_q = null;
-    var num = Math.round(Math.random()) //number of things...
+    var num = Math.floor(Math.random()*3) //number of things...
     switch(num) {
     case 0:
 	new_q = new IntegerAlgebraProb();
@@ -76,6 +76,8 @@ var nextQuestion = function()
     case 1:
 	new_q = new AveragesProb();
 	break;
+    case 2:
+	new_q = new FactorProb();
     }
     console.log(new_q)
     new_q.ask();
