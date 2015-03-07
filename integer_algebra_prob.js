@@ -43,36 +43,63 @@ var IntegerAlgebraProb = function()
 	    (coeffs[0]==0 && coeffs[1]==0) ||
 	    (coeffs[2]==0 && coeffs[3]==0) ||
 	    (coeffs[0]-coeffs[2]==0));
+    this.coeffs = coeffs;
     var thevar = vars[Math.round(Math.random()*vars.length)];
-    qstring = "Solve for <it>x</it>:</br>";
-    qstring += this.get_a_side(coeffs[0],coeffs[1]) +
+    var qstring = "Solve for <it>x</it>:</br>";
+    qstring += this.get_a_side(coeffs[0],coeffs[1],thevar) +
 	" = " +
-	get_a_side(coeffs[2],coeffs[3]);
-    var ans = this.get_answer(coeffs[0],coeffs[1],coeffs[2],coeffs[3]);
-    var opts = [];
-    opts.append(ans);
-    
-    var q = Question();
+	this.get_a_side(coeffs[2],coeffs[3],thevar);
+    var ans = this.get_answer();
+    var opts = this.get_options();
+    var expl = "no explanation yet"
+    var q = new Question(qstring,opts,ans,expl);
+    return q;
 }
 
 
-IntegerAlgebraProb.prototype.get_options = function(coeffs)
+IntegerAlgebraProb.prototype.get_options = function()
 {
     var opts = [];
-    opts.append(this.get_answer)
+    var a = this.coeffs[0];
+    var b = this.coeffs[1];
+    var c = this.coeffs[2];
+    var d = this.coeffs[3];
+    opts.push(this.get_answer());
+    if(b-d!=0)
+    {
+	var simpd = simplify_frac(a-c,b-d);
+	opts.push(String(simpd[0])+"/"+String(simpd[1]));
+	simpd = simplify_frac(d-b,a-c);
+	opts.push(String(simpd[0])+"/"+String(simpd[1]));
+    }
+    opts.push(a+b+c+d);    
+    if(a!=0)
+    {
+	simpd = simplify_frac(c+d-b,a);
+	opts.push(String(simpd[0])+"/"+String(simpd[1]));
+    }
+    while(opts.length<5)
+    {
+    opts.push(Math.round(Math.random()*10));    
+    }
+    opts.sort(function(a,b)
+	      {
+		  return Math.random()>0.5;
+	      })
+    return opts;
 }
 
-IntegerAlgebraProb.prototype.get_answer = function(a,b,c,d)
+IntegerAlgebraProb.prototype.get_answer = function()
 {
-    var num = d - b;
-    var den = a - c;
-    var simpd = simplify(num,den);
+    var num = this.coeffs[3] - this.coeffs[1];
+    var den = this.coeffs[0] - this.coeffs[2];
+    var simpd = simplify_frac(num,den);
     num = simpd[0];
     den = simpd[1];
     return String(num)+"/"+String(den);
 }
 
-IntegerAlgebraProb.prototype.get_a_side = function(a,b)
+IntegerAlgebraProb.prototype.get_a_side = function(a,b,thevar)
 {
     var retstr = "";
     if(a==0)

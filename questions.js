@@ -65,3 +65,8 @@ var sampleQ = new Question("What's 3 + 4?",
 
 
 
+var nextQuestion = function()
+{
+    var new_q = new IntegerAlgebraProb();
+    new_q.ask();
+}
