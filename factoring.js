@@ -5,7 +5,7 @@
 
 var FactorProb = function()
 {
-    return Factor1();
+    return (Math.random()>0.5) ? Factor1() : Factor2();
 }
 
 
@@ -45,6 +45,41 @@ var Factor1 = function()
 	"we see that we get the other solution, "+
 	"so we don't need to worry about "+
 	"there being multiple solutions for <i>x</i>.";
+    var q = new Question(qstring, opts, ans, expl);
+    return q;
+}
+
+
+var Factor2 = function()
+{
+    var vars = ['x','y','a','n','p']
+    var thevar = vars[Math.floor(Math.random()*4)];
+    // okay these select rand els things are wrong I think...
+    var qstring = "Solve for <i>"+thevar+"</i>:</br>"
+    var s1 = 0;
+    var s2 = 0;
+    do
+    {
+	s1 = Math.floor(Math.random()*12)-6;
+	s2 = Math.floor(Math.random()*12)-6;
+    } while(s1==0 || s2==0);
+    var a = 1;
+    var b = s1+s2;
+    var c = s1*s2;
+    qstring += "<i>"+"x^2 "; // dont need str(a) now..
+    qstring += ((b>0)?"+ ":"- ")+String(Math.abs(b));
+    qstring += ((c>0)?" + ":" - ")+String(Math.abs(c))+" = 0</i></br>"
+	//+ "+String(b)+"x +"+
+	//String(c)+" = 0</i></br>";
+    var ans = String(s1)+", "+String(s2);
+    var opts = [];
+    opts.push(ans);
+    opts.push(String(b-s1)+", "+String(b+s1));
+    opts.push(String(c+s2)+", "+String(c-s1));
+    opts.push(String(b*s2)+", "+String(c+s1));
+    opts.push(String(s1)+", "+String(s2+s1));
+    opts.sort(function(a,b){return Math.random()>0.5;});
+    var expl = "todo"
     var q = new Question(qstring, opts, ans, expl);
     return q;
 }
