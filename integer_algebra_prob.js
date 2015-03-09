@@ -49,7 +49,7 @@ var IntegerAlgebraProb = function()
     qstring += this.get_a_side(coeffs[0],coeffs[1],thevar) +
 	" = " +
 	this.get_a_side(coeffs[2],coeffs[3],thevar);
-    var ans = this.get_answer();
+    var ans = new Rational(coeffs[3]-coeffs[1],coeffs[2]-coeffs[0]);
     var opts = this.get_options();
     var expl = "no explanation yet"
     var q = new Question(qstring,opts,ans,expl);
@@ -68,15 +68,18 @@ IntegerAlgebraProb.prototype.get_options = function()
     if(b-d!=0)
     {
 	var simpd = simplify_frac(a-c,b-d);
-	opts.push(String(simpd[0])+"/"+String(simpd[1]));
+	//opts.push(String(simpd[0])+"/"+String(simpd[1]));
+	opts.push(new Rational(a-c,b-d));
 	simpd = simplify_frac(d-b,a-c);
-	opts.push(String(simpd[0])+"/"+String(simpd[1]));
+	//opts.push(String(simpd[0])+"/"+String(simpd[1]));
+	opts.push(new Rational(d-b,a-c));
     }
     opts.push(a+b+c+d);    
     if(a!=0)
     {
 	simpd = simplify_frac(c+d-b,a);
-	opts.push(String(simpd[0])+"/"+String(simpd[1]));
+	//opts.push(String(simpd[0])+"/"+String(simpd[1]));
+	opts.push(new Rational(c+d-b,a));
     }
     while(opts.length<5)
     {
@@ -92,11 +95,12 @@ IntegerAlgebraProb.prototype.get_options = function()
 IntegerAlgebraProb.prototype.get_answer = function()
 {
     var num = this.coeffs[3] - this.coeffs[1];
-    var den = this.coeffs[0] - this.coeffs[2];
+    var den = this.coeffs[2] - this.coeffs[0];
     var simpd = simplify_frac(num,den);
     num = simpd[0];
     den = simpd[1];
-    return String(num)+"/"+String(den);
+    //return String(num)+"/"+String(den);
+    return new Rational(num,den);
 }
 
 IntegerAlgebraProb.prototype.get_a_side = function(a,b,thevar)
