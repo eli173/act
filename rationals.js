@@ -20,13 +20,9 @@ var Rational = function(num,den)
 
 Rational.prototype.simplify = function()
 {
-    if(this.denominator<0)
-    {
-	this.denominator = -this.denominator;
-	this.numerator = -this.numerator;
-    }
     var b=this.numerator;
     var a=this.denominator;
+    console.log(a,b);
     var gcd = 1;
     while(b!=0)
     {
@@ -37,6 +33,12 @@ Rational.prototype.simplify = function()
     }
     this.numerator = this.numerator/gcd;
     this.denominator = this.denominator/gcd;
+    if(this.denominator<0)
+    {
+	this.denominator = -this.denominator;
+	this.numerator = -this.numerator;
+    }
+
 }
 
 Rational.prototype.toString = function()
