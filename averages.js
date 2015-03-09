@@ -17,6 +17,7 @@ var AveragesProb = function()
 
 var AveragesType1 = function()
 {
+    console.log('at1');
     var nums = [];
     var len = Math.round(Math.random()*3)+4;
     for(var i=0;i<len;i++)
@@ -42,6 +43,7 @@ var AveragesType1 = function()
 
 var AveragesType2 = function()
 {
+    console.log('at2');
     var name = "Ronaldo"
     var qstring = name+" has taken four of the five tests in his math class and gotten the following grades:</br>"
     var avg = [90,94,88][Math.round(Math.random()*2)];
@@ -78,6 +80,7 @@ var AveragesType2 = function()
 
 var AveragesType3 = function()
 {
+    console.log('at3');
     var qstring = "Your boss at the department store wants you to figure out the average price for the T-shirts in stock. You listed the prices of various shirts and the quantities in stock as follows:</br>"
     var prices = [6.99];
     for(var i =1;i<8;i++)

@@ -1,8 +1,9 @@
 
 
 
-var Question = function(question, options, answer, explanation=null)
+var Question = function(question, options, answer, explanation)
 { // question should be html for simplicity I guess
+    explanation = typeof explanation !== 'undefined' ? explanation : null;
     this.question = question;
     this.options = options;
     this.answer = answer;
@@ -71,14 +72,14 @@ var nextQuestion = function()
     var num = Math.floor(Math.random()*3) //number of things...
     switch(num) {
     case 0:
-	new_q = new IntegerAlgebraProb();
-	break;
+    	new_q = new IntegerAlgebraProb();
+    	break;
     case 1:
-	new_q = new AveragesProb();
-	break;
+    	new_q = new AveragesProb();
+    	break;
     case 2:
-	new_q = new FactorProb();
+    	new_q = new FactorProb();
+    	break;
     }
-    console.log(new_q)
     new_q.ask();
 }

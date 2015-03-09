@@ -3,8 +3,10 @@
 // should be just a utility class?
 
 
-var Rational = function(num=1,den=1)
+var Rational = function(num,den)
 {
+    num = typeof num !== 'undefined' ? num : 1;
+    den = typeof den !== 'undefined' ? den : 1;
     if(den==0)
     { //error!
 	console.log("Error: can't have 0 as denominator")
@@ -39,7 +41,11 @@ Rational.prototype.simplify = function()
 
 Rational.prototype.toString = function()
 {
-    if(this.denominator==1)
+    if(this.numerator==0)
+    {
+	return String(0);
+    }
+    else if(this.denominator==1)
     {
 	return String(this.numerator);
     }

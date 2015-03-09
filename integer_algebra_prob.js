@@ -1,32 +1,4 @@
 
-// gotta check for div by 0
-
-var gcd = function(a,b)
-{
-    var f = a;
-    var s = b;
-    var tmp = 0;
-    while(s!=0)
-    {
-	tmp = f % s;
-	f = s;
-	s = tmp;	
-    }
-    return f;
-}
-
-
-var simplify_frac = function(n, d)
-{
-    if (d<0) // if both neg then pos, if just d then swap
-    {
-	n = -n;
-	d = -d;
-    }
-    var thegcd = gcd(Math.abs(n),Math.abs(d));
-    return [n/thegcd, d/thegcd];
-}
-
 
 var IntegerAlgebraProb = function()
 {
@@ -43,84 +15,38 @@ var IntegerAlgebraProb = function()
 	    (coeffs[0]==0 && coeffs[1]==0) ||
 	    (coeffs[2]==0 && coeffs[3]==0) ||
 	    (coeffs[0]-coeffs[2]==0));
-    this.coeffs = coeffs;
     var thevar = vars[Math.round(Math.random()*(vars.length-1))];
     var qstring = "Solve for <i>"+thevar+"</i>:</br>";
-    qstring += this.get_a_side(coeffs[0],coeffs[1],thevar) +
+    var a = coeffs[0], b = coeffs[1], c = coeffs[2], d = coeffs[3];
+    var get_side_str = function(f,s,vbl)
+    {
+	var retstr = ""
+	if(f==0)
+	    retstr += "";//retstr += String(b);
+	else
+	    retstr += String(f)+vbl;
+	if(s>0)
+	    retstr += " + "+ String(s);
+	else if(s<0)
+	    retstr += " - "+ String(Math.abs(s));
+	return retstr;
+    }
+    qstring += get_side_str(a,b,thevar) + 
 	" = " +
-	this.get_a_side(coeffs[2],coeffs[3],thevar);
-    var ans = new Rational(coeffs[3]-coeffs[1],coeffs[2]-coeffs[0]);
-    var opts = this.get_options();
-    var expl = "no explanation yet"
-    var q = new Question(qstring,opts,ans,expl);
-    return q;
-}
-
-
-IntegerAlgebraProb.prototype.get_options = function()
-{
+	get_side_str(c,d,thevar);
+    var ans = new Rational(d-b,c-a);
     var opts = [];
-    var a = this.coeffs[0];
-    var b = this.coeffs[1];
-    var c = this.coeffs[2];
-    var d = this.coeffs[3];
-    opts.push(this.get_answer());
+    opts.push(ans);
     if(b-d!=0)
-    {
-	var simpd = simplify_frac(a-c,b-d);
-	//opts.push(String(simpd[0])+"/"+String(simpd[1]));
 	opts.push(new Rational(a-c,b-d));
-	simpd = simplify_frac(d-b,a-c);
-	//opts.push(String(simpd[0])+"/"+String(simpd[1]));
-	opts.push(new Rational(d-b,a-c));
-    }
-    opts.push(a+b+c+d);    
-    if(a!=0)
-    {
-	simpd = simplify_frac(c+d-b,a);
-	//opts.push(String(simpd[0])+"/"+String(simpd[1]));
-	opts.push(new Rational(c+d-b,a));
-    }
+    opts.push(new Rational(b-d,c-a));
+    opts.push(a+b+c+d);
     while(opts.length<5)
     {
-    opts.push(Math.round(Math.random()*10));    
+	opts.push(Math.round(Math.random()*10));
     }
-    opts.sort(function(a,b)
-	      {
-		  return Math.random()>0.5;
-	      })
-    return opts;
-}
-
-IntegerAlgebraProb.prototype.get_answer = function()
-{
-    var num = this.coeffs[3] - this.coeffs[1];
-    var den = this.coeffs[2] - this.coeffs[0];
-    var simpd = simplify_frac(num,den);
-    num = simpd[0];
-    den = simpd[1];
-    //return String(num)+"/"+String(den);
-    return new Rational(num,den);
-}
-
-IntegerAlgebraProb.prototype.get_a_side = function(a,b,thevar)
-{
-    var retstr = "";
-    if(a==0)
-    {
-	retstr += String(b);
-    }
-    else
-    {
-	retstr += String(a) + thevar;
-    }
-    if(b>0) // dont need to do anything if b==0
-    {
-	retstr += " + " + String(b);
-    }
-    else if(b<0)
-    {
-	retstr += " - " + String(Math.abs(b));
-    }
-    return retstr;
+    opts.sort(function(a,b){return Math.random()>0.5;});
+    var expl = "no explanation yet";
+    var q = new Question(qstring,opts,ans,expl);
+    return q;
 }
