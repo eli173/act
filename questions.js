@@ -89,6 +89,8 @@ var nextQuestion = function()
 	new_q = new Factor2();
     else if(questionType=="Systems of equations")
 	new_q = new Factor1();
+    else if(questionType=="FOIL")
+	new_q = new FoilProb();
     new_q.ask();
 }
 
@@ -112,5 +114,7 @@ var openTypeSelector = function()
     {selectType("Systems of equations")};
     document.getElementById("t_random").onclick = function()
     {selectType("Random")};
+    document.getElementById("t_foil").onclick = function()
+    {selectType("FOIL")};
 }
 
