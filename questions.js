@@ -1,25 +1,4 @@
 
-
-
-var Type = function(name,generator)
-{
-    name = typeof name !== 'undefined' ? name : "";
-    generator = typeof generator !== 'undefined' ? generator : null;
-    this.name = name;
-    this.generator = generator;
-    return this;
-};
-
-
-    
-var types = [
-    new Type("Algebra", IntegerAlgebraProb),
-    new Type("Averages", AveragesProb),
-    new Type("Factoring",Factor1),
-    new Type("Systems of equations",Factor2),
-    new Type("Random",nextQuestion)
-];
-
 var Question = function(question, options, answer, explanation)
 { // question should be html for simplicity I guess
     explanation = typeof explanation !== 'undefined' ? explanation : null;
@@ -133,7 +112,5 @@ var openTypeSelector = function()
     {selectType("Systems of equations")};
     document.getElementById("t_random").onclick = function()
     {selectType("Random")};
-    
-    
 }
 
