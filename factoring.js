@@ -64,7 +64,7 @@ var Factor2 = function()
 	s2 = Math.floor(Math.random()*12)-6;
     } while(s1==0 || s2==0);
     var a = 1;
-    var b = s1+s2;
+    var b = -s1-s2;
     var c = s1*s2;
     qstring += "<i>"+thevar+"^2 "; // dont need str(a) now..
     qstring += ((b>0)?"+ ":"- ")+String(Math.abs(b))+thevar;
