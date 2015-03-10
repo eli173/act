@@ -1,5 +1,6 @@
 
 
+
 var Type = function(name,generator)
 {
     name = typeof name !== 'undefined' ? name : "";
@@ -77,55 +78,62 @@ Question.prototype.ask = function()
 };
 
 
-var sampleQ = new Question("What's 3 + 4?",
-			   ['-1','12','7','34','3/4'],
-		       '7',
-		       "self-explanatory");
 
 
+
+var questionType = "Random";
 
 var nextQuestion = function()
 {
+    document.getElementById("types").hidden = true;
     var new_q = null;
-    var num = Math.floor(Math.random()*3) //number of things...
-    switch(num) {
-    case 0:
-    	new_q = new IntegerAlgebraProb();
-    	break;
-    case 1:
-    	new_q = new AveragesProb();
-    	break;
-    case 2:
-    	new_q = new FactorProb();
-    	break;
+    if(questionType=="Random")
+    {
+	var num = Math.floor(Math.random()*3) //number of things...
+	switch(num) {
+	case 0:
+    	    new_q = new IntegerAlgebraProb();
+    	    break;
+	case 1:
+    	    new_q = new AveragesProb();
+    	    break;
+	case 2:
+    	    new_q = new FactorProb();
+    	    break;
+	}
     }
+    else if(questionType=="Algebra")
+	new_q = new IntegerAlgebraProb();
+    else if(questionType=="Averages")
+	new_q = new AveragesProb();
+    else if(questionType=="Factoring")
+	new_q = new Factor2();
+    else if(questionType=="Systems of equations")
+	new_q = new Factor1();
     new_q.ask();
 }
 
 
+var selectType = function(type)
+{
+    document.getElementById("typestatus").innerHTML = type;
+    questionType = type;
+}
+
 var openTypeSelector = function()
 {
-    var typesEl = document.getElementById("types");
-    var innerstr = "";
-    for(var i=0;i<types.length;i++)
-    {
-	innerstr += '<div class="type">';
-	innerstr += types[i].name;
-	innerstr += '</div>';
-    }
-    typesEl.innerHTML = innerstr;
-    typesEl.hidden = false;
-    var divs = document.getElementsByClassName("type");
-    console.log(divs)
-    for(i=0;i<divs.length;i++)
-    {
-	divs[i].onClick = function(){selectType(divs[i].innerHTML);};
-    }
+    document.getElementById("types").hidden = false;
+    document.getElementById("t_algebra").onclick = function()
+    {selectType("Algebra")};
+    document.getElementById("t_averages").onclick = function()
+    {selectType("Averages")};
+    document.getElementById("t_factoring").onclick = function()
+    {selectType("Factoring")};
+    document.getElementById("t_sysofeqns").onclick = function()
+    {selectType("Systems of equations")};
+    document.getElementById("t_random").onclick = function()
+    {selectType("Random")};
     
     
 }
 
-var selectType = function(type)
-{
-    console.log(type);
-}
