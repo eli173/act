@@ -22,7 +22,6 @@ Rational.prototype.simplify = function()
 {
     var b=this.numerator;
     var a=this.denominator;
-    console.log(a,b);
     var gcd = 1;
     while(b!=0)
     {

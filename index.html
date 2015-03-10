@@ -4,11 +4,11 @@
 <html>
   <head>
     <title>ACT Math Practice Questions</title>
-    <script src="questions.js"></script>
+    <script src="rationals.js"></script>
     <script src="averages.js"></script>
     <script src="factoring.js"></script>
-    <script src="rationals.js"></script>
     <script src="integer_algebra_prob.js"></script>
+    <script src="questions.js"></script>
     <link rel="stylesheet" href="style.css">
     <script>window.onload = function(){nextQuestion();}</script>
   </head>
@@ -29,10 +29,20 @@
       <div id="results">
 	nothing here
       </div>
-      </br>
-      </br>
+      <br />
+      <br />
       <input id="next" type="button"
       	     value="Next Question" onclick="nextQuestion();"/>
+      <br />
+      <br />
+      Current type: <div id="typestatus">Random</div>
+      <br />
+      <input id="selector" type="button"
+	     value="Select Type" onclick="openTypeSelector();"/>
+      <br />
+      <div id="types">
+	
+      </div>
     </div>
   </body>
 </html>

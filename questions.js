@@ -1,5 +1,23 @@
 
 
+var Type = function(name,generator)
+{
+    name = typeof name !== 'undefined' ? name : "";
+    generator = typeof generator !== 'undefined' ? generator : null;
+    this.name = name;
+    this.generator = generator;
+    return this;
+};
+
+
+    
+var types = [
+    new Type("Algebra", IntegerAlgebraProb),
+    new Type("Averages", AveragesProb),
+    new Type("Factoring",Factor1),
+    new Type("Systems of equations",Factor2),
+    new Type("Random",nextQuestion)
+];
 
 var Question = function(question, options, answer, explanation)
 { // question should be html for simplicity I guess
@@ -82,4 +100,32 @@ var nextQuestion = function()
     	break;
     }
     new_q.ask();
+}
+
+
+var openTypeSelector = function()
+{
+    var typesEl = document.getElementById("types");
+    var innerstr = "";
+    for(var i=0;i<types.length;i++)
+    {
+	innerstr += '<div class="type">';
+	innerstr += types[i].name;
+	innerstr += '</div>';
+    }
+    typesEl.innerHTML = innerstr;
+    typesEl.hidden = false;
+    var divs = document.getElementsByClassName("type");
+    console.log(divs)
+    for(i=0;i<divs.length;i++)
+    {
+	divs[i].onClick = function(){selectType(divs[i].innerHTML);};
+    }
+    
+    
+}
+
+var selectType = function(type)
+{
+    console.log(type);
 }

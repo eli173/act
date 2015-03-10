@@ -66,8 +66,8 @@ var Factor2 = function()
     var a = 1;
     var b = s1+s2;
     var c = s1*s2;
-    qstring += "<i>"+"x^2 "; // dont need str(a) now..
-    qstring += ((b>0)?"+ ":"- ")+String(Math.abs(b));
+    qstring += "<i>"+thevar+"^2 "; // dont need str(a) now..
+    qstring += ((b>0)?"+ ":"- ")+String(Math.abs(b))+thevar;
     qstring += ((c>0)?" + ":" - ")+String(Math.abs(c))+" = 0</i></br>"
 	//+ "+String(b)+"x +"+
 	//String(c)+" = 0</i></br>";

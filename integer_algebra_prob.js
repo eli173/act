@@ -15,8 +15,7 @@ var IntegerAlgebraProb = function()
 	    (coeffs[0]==0 && coeffs[1]==0) ||
 	    (coeffs[2]==0 && coeffs[3]==0) ||
 	    (coeffs[0]-coeffs[2]==0));
-    console.log(coeffs);
-    var thevar = vars[Math.round(Math.random()*(vars.length-1))];
+        var thevar = vars[Math.round(Math.random()*(vars.length-1))];
     var qstring = "Solve for <i>"+thevar+"</i>:</br>";
     var a = coeffs[0], b = coeffs[1], c = coeffs[2], d = coeffs[3];
     var get_side_str = function(f,s,vbl)
