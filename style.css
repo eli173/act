@@ -8,19 +8,19 @@
 }
 
 .container {
-    width:200px;
+    width:25%;
     
 }
 
 #question {
-    width:400px;
+    width:50%;
 }
 
 #results {
-    width:400px;
+    width:50%;
 }
 
-#next {
+.button {
     padding: 1px 10px 1px 10px;
     color: #fff;
     background: #07f;
