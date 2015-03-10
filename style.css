@@ -8,16 +8,16 @@
 }
 
 .container {
-    width:25%;
+    width:200px;
     
 }
 
 #question {
-    width:50%;
+    width:400px;
 }
 
 #results {
-    width:50%;
+    width:400px;
 }
 
 .button {
